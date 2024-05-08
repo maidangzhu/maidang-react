@@ -1,4 +1,3 @@
-// packages/react/src/jsx.ts
 import { REACT_ELEMENT_TYPE } from 'shared/ReactSymbols';
 import { Type, Ref, Key, Props, ReactElementType, ElementType } from 'shared/ReactTypes';
 
@@ -14,18 +13,27 @@ const ReactElement = function (type: Type, key: Key, ref: Ref, props: Props): Re
   return element;
 };
 
+/**
+ * @param type 元素类型
+ * @param config 元素配置
+ * @param children 子元素
+ */
 export const jsx = (type: ElementType, config: any, ...children: any) => {
   let key: Key = null;
   let ref: Ref = null;
   const props: Props = {};
+
+  // 1. 拿到当前组件的 key、ref、props
   for (const prop in config) {
     const val = config[prop];
+    // key 也是 props 的某一种
     if (prop === 'key') {
       if (val !== undefined) {
         key = '' + val;
       }
       continue;
     }
+    // ref 也是 props 的一种
     if (prop === 'ref') {
       if (val !== undefined) {
         ref = val;
@@ -44,6 +52,8 @@ export const jsx = (type: ElementType, config: any, ...children: any) => {
       props.children = children;
     }
   }
+
+  // 2. 返回一个 ReactElement 对象
   return ReactElement(type, key, ref, props);
 };
 
