@@ -18,6 +18,7 @@ const ReactElement = function (type: Type, key: Key, ref: Ref, props: Props): Re
  * @param config 元素配置
  * @param children 子元素
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const jsx = (type: ElementType, config: any, ...children: any) => {
   let key: Key = null;
   let ref: Ref = null;
@@ -57,6 +58,7 @@ export const jsx = (type: ElementType, config: any, ...children: any) => {
   return ReactElement(type, key, ref, props);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const jsxDEV = (type: ElementType, config: any) => {
   let key: Key = null;
   let ref: Ref = null;
